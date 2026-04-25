@@ -1,6 +1,6 @@
 # CampusFix
 
-CampusFix is a simple campus issue tracking web app built with Python (Flask) and HTML/CSS.
+CampusFix is a Python + Flask campus issue tracking app that lets users report and monitor campus issues with status updates, dashboards, filters, and admin backup tools.
 
 ## Features
 - Report campus issues
