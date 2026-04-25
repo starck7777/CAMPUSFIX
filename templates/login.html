@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="panel form-panel">
+    <h1>Login</h1>
+    <p>Sign in with your own account credentials.</p>
+
+    <form method="post" class="issue-form login-form">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" placeholder="Enter your username" required>
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required>
+
+        <button class="btn" type="submit">Login</button>
+    </form>
+
+    <p class="auth-switch">No account yet? <a href="{{ url_for('register') }}">Create a new user account</a>.</p>
+</section>
+{% endblock %}

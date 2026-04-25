@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero">
+    {% if current_user.role == 'admin' %}
+        <h1>Admin Portal</h1>
+        <p>Monitor campus complaints and update whether work is open, in progress, or completed.</p>
+        <a class="btn" href="{{ url_for('issues') }}">Manage Issue Status</a>
+    {% else %}
+        <h1>Student Portal</h1>
+        <p>Submit campus complaints and track the latest status of each reported issue.</p>
+        <a class="btn" href="{{ url_for('report_issue') }}">Report an Issue</a>
+    {% endif %}
+</section>
+
+<section class="stats-grid">
+    <article class="card">
+        <h3>Total Issues</h3>
+        <p>{{ stats.total }}</p>
+    </article>
+    <article class="card">
+        <h3>Open</h3>
+        <p>{{ stats.open_count }}</p>
+    </article>
+    <article class="card">
+        <h3>In Progress</h3>
+        <p>{{ stats.progress_count }}</p>
+    </article>
+    <article class="card">
+        <h3>Resolved</h3>
+        <p>{{ stats.resolved_count }}</p>
+    </article>
+</section>
+
+{% if current_user.role == 'admin' %}
+<section class="panel">
+    <h2>Data Backup</h2>
+    <p>Export the current database or import a previous CampusFix backup file.</p>
+    <div class="backup-actions">
+        <a class="btn" href="{{ url_for('export_backup') }}">Download Backup</a>
+        <form method="post" action="{{ url_for('import_backup') }}" enctype="multipart/form-data" class="backup-form">
+            <input type="file" name="backup_file" accept=".db,.sqlite,.sqlite3" required>
+            <button type="submit" class="btn">Import Backup</button>
+        </form>
+    </div>
+</section>
+{% endif %}
+
+<section class="panel">
+    <h2>Recent Reports</h2>
+    {% if recent %}
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                        <th>Reported</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for issue in recent %}
+                    <tr>
+                        <td data-label="ID">#{{ issue.id }}</td>
+                        <td data-label="Title">{{ issue.title }}</td>
+                        <td data-label="Category">{{ issue.category }}</td>
+                        <td data-label="Location">{{ issue.location }}</td>
+                        <td data-label="Status"><span class="status {{ issue.status|lower|replace(' ', '-') }}">{{ issue.status }}</span></td>
+                        <td data-label="Reported">{{ issue.created_at }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p>No issues reported yet.</p>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="panel form-panel">
+    <h1>Student Complaint Form</h1>
+    <p>Students can submit new complaints here. Admins can review and update the status from the issue list.</p>
+    <form method="post" class="issue-form">
+        <label for="title">Issue Title</label>
+        <input id="title" name="title" type="text" placeholder="Broken classroom projector" required>
+
+        <label for="category">Category</label>
+        <select id="category" name="category" required>
+            <option value="">Choose one...</option>
+            <option>Electrical</option>
+            <option>Plumbing</option>
+            <option>Furniture</option>
+            <option>Cleanliness</option>
+            <option>Network/IT</option>
+            <option>Safety</option>
+            <option>Other</option>
+        </select>
+
+        <label for="location">Location</label>
+        <input id="location" name="location" type="text" placeholder="Library, Floor 2" required>
+
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="5" placeholder="Describe the issue in detail" required></textarea>
+
+        <button class="btn" type="submit">Submit Issue</button>
+    </form>
+</section>
+{% endblock %}

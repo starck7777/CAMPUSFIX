@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b3c5d">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>CampusFix - Stage 12</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="app-icon-192.png" type="image/png">
+    <link rel="apple-touch-icon" href="app-icon-192.png">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .topbar {
+            background: linear-gradient(135deg, #0b3c5d, #1d5c7c);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        nav a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .btn {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .panel {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .chart {
+            display: flex;
+            align-items: end;
+            justify-content: space-around;
+            height: 200px;
+            margin: 1rem 0;
+        }
+        .bar {
+            width: 60px;
+            background: #007bff;
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        .bar.open { background: #ffc107; height: 40%; }
+        .bar.in-progress { background: #17a2b8; height: 20%; }
+        .bar.resolved { background: #28a745; height: 40%; }
+        .table-wrap {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        .status {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .status.open {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .status.in-progress {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+        .status.resolved {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .admin-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .admin-actions select {
+            padding: 0.25rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .admin-actions button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .backup-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .backup-form input {
+            margin-right: 0.5rem;
+        }
+        .dynamic-notice {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        .role-notice {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        .pwa-notice {
+            background: #e8f5e8;
+            border: 1px solid #c3e6c3;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        .install-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">CampusFix</div>
+        <nav>
+            <a href="#">Dashboard</a>
+            <a href="#">Analytics</a>
+            <a href="#">Manage Issues</a>
+            <a href="#">Report Issue</a>
+            <span class="user-badge">Admin</span>
+            <button class="nav-button">Logout</button>
+            <button class="install-btn" onclick="installPWA()">Install App</button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="dynamic-notice">
+            <strong>Backend Integration:</strong> Data is now loaded dynamically from the Flask backend and SQLite database.
+        </div>
+        <div class="role-notice">
+            <strong>User Roles:</strong> System now distinguishes between Student and Admin users with different permissions and views.
+        </div>
+        <div class="pwa-notice">
+            <strong>PWA Features:</strong> Progressive Web App capabilities added - installable, offline-capable, with service worker for caching.
+        </div>
+
+        <section class="hero">
+            <h1>Admin Portal</h1>
+            <p>Monitor campus complaints, update statuses, and view analytics with backend support.</p>
+            <a class="btn" href="#">View Analytics</a>
+        </section>
+
+        <section class="stats-grid">
+            <article class="card">
+                <h3>Total Issues</h3>
+                <p>5</p>
+            </article>
+            <article class="card">
+                <h3>Open</h3>
+                <p>2</p>
+            </article>
+            <article class="card">
+                <h3>In Progress</h3>
+                <p>1</p>
+            </article>
+            <article class="card">
+                <h3>Resolved</h3>
+                <p>2</p>
+            </article>
+        </section>
+
+        <section class="panel">
+            <h2>Issue Analytics</h2>
+            <div class="chart">
+                <div class="bar open">2<br>Open</div>
+                <div class="bar in-progress">1<br>In Progress</div>
+                <div class="bar resolved">2<br>Resolved</div>
+            </div>
+            <p>Visual representation of issue statuses over time.</p>
+        </section>
+
+        <section class="panel">
+            <h2>Data Backup</h2>
+            <p>Export the current database or import a previous CampusFix backup file.</p>
+            <div class="backup-actions">
+                <a class="btn" href="#">Download Backup</a>
+                <form class="backup-form">
+                    <input type="file" accept=".db,.sqlite,.sqlite3" required>
+                    <button type="submit" class="btn">Import Backup</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Manage Issues</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#1</td>
+                            <td>Broken classroom projector</td>
+                            <td>Classroom</td>
+                            <td>Engineering Block A - Room 204</td>
+                            <td><span class="status open">Open</span></td>
+                            <td class="admin-actions">
+                                <select>
+                                    <option>Open</option>
+                                    <option>In Progress</option>
+                                    <option>Resolved</option>
+                                </select>
+                                <button>Update</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#2</td>
+                            <td>Leaky faucet in bathroom</td>
+                            <td>Facility</td>
+                            <td>Main Building - Floor 2</td>
+                            <td><span class="status in-progress">In Progress</span></td>
+                            <td class="admin-actions">
+                                <select>
+                                    <option>Open</option>
+                                    <option selected>In Progress</option>
+                                    <option>Resolved</option>
+                                </select>
+                                <button>Update</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#3</td>
+                            <td>Broken chair in library</td>
+                            <td>Facility</td>
+                            <td>Library - Study Area</td>
+                            <td><span class="status resolved">Resolved</span></td>
+                            <td class="admin-actions">
+                                <select>
+                                    <option>Open</option>
+                                    <option>In Progress</option>
+                                    <option selected>Resolved</option>
+                                </select>
+                                <button>Update</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        function installPWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        }
+    </script>
+</body>
+</html>

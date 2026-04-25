@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusFix</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .topbar {
+            background: linear-gradient(135deg, #0b3c5d, #1d5c7c);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        nav a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .btn {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .panel {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .table-wrap {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        .status {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .status.open {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .status.in-progress {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+        .status.resolved {
+            background-color: #d4edda;
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">CampusFix</div>
+        <nav>
+            <a href="#">Dashboard</a>
+            <a href="#">View Issues</a>
+            <a href="#">Report Issue</a>
+            <span class="user-badge">Student</span>
+            <button class="nav-button">Logout</button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Student Portal</h1>
+            <p>Submit campus complaints and track the latest status of each reported issue.</p>
+            <a class="btn" href="#">Report an Issue</a>
+        </section>
+
+        <section class="stats-grid">
+            <article class="card">
+                <h3>Total Issues</h3>
+                <p>5</p>
+            </article>
+            <article class="card">
+                <h3>Open</h3>
+                <p>2</p>
+            </article>
+            <article class="card">
+                <h3>In Progress</h3>
+                <p>1</p>
+            </article>
+            <article class="card">
+                <h3>Resolved</h3>
+                <p>2</p>
+            </article>
+        </section>
+
+        <section class="panel">
+            <h2>Recent Reports</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Reported</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="ID">#1</td>
+                            <td data-label="Title">Broken classroom projector</td>
+                            <td data-label="Category">Classroom</td>
+                            <td data-label="Location">Engineering Block A - Room 204</td>
+                            <td data-label="Status"><span class="status open">Open</span></td>
+                            <td data-label="Reported">2024-01-15</td>
+                        </tr>
+                        <tr>
+                            <td data-label="ID">#2</td>
+                            <td data-label="Title">Leaky faucet in bathroom</td>
+                            <td data-label="Category">Facility</td>
+                            <td data-label="Location">Main Building - Floor 2</td>
+                            <td data-label="Status"><span class="status in-progress">In Progress</span></td>
+                            <td data-label="Reported">2024-01-14</td>
+                        </tr>
+                        <tr>
+                            <td data-label="ID">#3</td>
+                            <td data-label="Title">Broken chair in library</td>
+                            <td data-label="Category">Facility</td>
+                            <td data-label="Location">Library - Study Area</td>
+                            <td data-label="Status"><span class="status resolved">Resolved</span></td>
+                            <td data-label="Reported">2024-01-13</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
