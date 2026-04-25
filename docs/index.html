@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusFix</title>
+    <meta name="description" content="CampusFix is a campus issue tracking project built with Flask, SQLite, and a responsive dashboard UI.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="hero-shell">
+        <nav class="topbar">
+            <div class="brand">CampusFix</div>
+            <div class="nav-links">
+                <a href="https://github.com/starck7777/CAMPUSFIX">Repository</a>
+                <a href="https://github.com/starck7777/CAMPUSFIX#run-locally">Run Locally</a>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-copy">
+                <span class="eyebrow">Campus maintenance, made trackable</span>
+                <h1>CampusFix turns issue reporting into a clear workflow.</h1>
+                <p>
+                    Students can report problems, admins can update progress, and everyone gets a simple dashboard
+                    for seeing what is open, in progress, or resolved.
+                </p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="https://github.com/starck7777/CAMPUSFIX">View Source</a>
+                    <a class="btn btn-secondary" href="https://github.com/starck7777/CAMPUSFIX#run-locally">Start the Flask App</a>
+                </div>
+            </div>
+
+            <div class="hero-panel">
+                <div class="mini-card">
+                    <span class="mini-label">Tech Stack</span>
+                    <strong>Python, Flask, SQLite</strong>
+                </div>
+                <div class="mini-card">
+                    <span class="mini-label">Built For</span>
+                    <strong>Campus issue tracking</strong>
+                </div>
+                <div class="mini-card">
+                    <span class="mini-label">Includes</span>
+                    <strong>Student and admin workflows</strong>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <main class="container">
+        <section class="notice">
+            <h2>About this GitHub-hosted site</h2>
+            <p>
+                This page is hosted with GitHub Pages. The full CampusFix application uses a Flask backend and SQLite
+                database, so GitHub can host the project website and documentation, but not run the live Python server.
+            </p>
+        </section>
+
+        <section class="grid three-up">
+            <article class="card">
+                <h3>Report issues</h3>
+                <p>Capture title, category, location, and description in a focused student reporting flow.</p>
+            </article>
+            <article class="card">
+                <h3>Track status</h3>
+                <p>Monitor progress across open, in-progress, and resolved issues with dashboard stats.</p>
+            </article>
+            <article class="card">
+                <h3>Admin tools</h3>
+                <p>Manage updates and move database backups in and out when needed.</p>
+            </article>
+        </section>
+
+        <section class="showcase">
+            <div class="section-heading">
+                <span class="eyebrow">Project snapshot</span>
+                <h2>What the app includes</h2>
+            </div>
+
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <span>Total Views</span>
+                    <strong>Student dashboard</strong>
+                </article>
+                <article class="stat-card">
+                    <span>Status Flow</span>
+                    <strong>Open to resolved</strong>
+                </article>
+                <article class="stat-card">
+                    <span>Persistence</span>
+                    <strong>SQLite-backed data</strong>
+                </article>
+                <article class="stat-card">
+                    <span>Access</span>
+                    <strong>Role-based screens</strong>
+                </article>
+            </div>
+
+            <div class="mock-table">
+                <div class="mock-table-header">
+                    <span>Recent Reports</span>
+                    <span class="pill">Demo structure</span>
+                </div>
+                <div class="mock-row">
+                    <span>Broken classroom projector</span>
+                    <span>Engineering Block A</span>
+                    <span class="status open">Open</span>
+                </div>
+                <div class="mock-row">
+                    <span>Leaking water cooler</span>
+                    <span>Library 1st Floor</span>
+                    <span class="status progress">In Progress</span>
+                </div>
+                <div class="mock-row">
+                    <span>Wi-Fi dead zone</span>
+                    <span>Hostel C</span>
+                    <span class="status resolved">Resolved</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="deploy">
+            <div class="section-heading">
+                <span class="eyebrow">Next step</span>
+                <h2>Run the full app on a Python host</h2>
+            </div>
+            <p>
+                If you want the actual working product online, deploy the Flask app to a service like Render, Railway,
+                or PythonAnywhere. GitHub Pages is best used here as the project website and entry point.
+            </p>
+        </section>
+    </main>
+</body>
+</html>

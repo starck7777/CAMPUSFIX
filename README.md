@@ -41,3 +41,12 @@ CampusFix is a Python + Flask campus issue tracking app that lets users report a
 4. Copy that folder to another Windows laptop and run `CampusFix.exe`.
 
 The packaged app stores its database in `.campusfix-data` next to the executable so it remains self-contained and portable. The build script also copies the current `campusfix.db` into the portable folder, so existing records move with the app.
+
+## GitHub Hosting
+This repository now includes a GitHub Pages site in `docs/` and an automated workflow in `.github/workflows/pages.yml`.
+
+- GitHub Pages can host the project website and documentation
+- GitHub Pages cannot run the full Flask + SQLite app backend
+- To publish the static site, push this repo to GitHub and enable Pages with the source set to `GitHub Actions`
+
+Once enabled, the project website will deploy from the `main` branch workflow. For the full live app, use a Python-capable host such as Render, Railway, or PythonAnywhere.
