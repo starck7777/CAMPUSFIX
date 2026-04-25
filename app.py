@@ -13,6 +13,7 @@ RESOURCE_DIR = Path(getattr(sys, "_MEIPASS", PROJECT_DIR))
 APP_DIR = Path(sys.executable).resolve().parent if getattr(sys, "frozen", False) else PROJECT_DIR
 DEFAULT_DATA_DIR = Path(os.environ.get("LOCALAPPDATA", PROJECT_DIR)) / "CampusFix"
 PORTABLE_DATA_DIR = APP_DIR / ".campusfix-data"
+HOSTED_DATA_ROOT = os.environ.get("CAMPUSFIX_DATA_DIR") or os.environ.get("RENDER_DISK_PATH") or os.environ.get("RENDER_DISK_MOUNT_PATH")
 
 
 def can_write_to_dir(candidate_dir: Path) -> bool:
@@ -28,6 +29,11 @@ def can_write_to_dir(candidate_dir: Path) -> bool:
 
 
 def resolve_data_dir() -> Path:
+    if HOSTED_DATA_ROOT:
+        hosted_dir = Path(HOSTED_DATA_ROOT) / "CampusFix"
+        if can_write_to_dir(hosted_dir):
+            return hosted_dir
+
     preferred_dir = PORTABLE_DATA_DIR if getattr(sys, "frozen", False) else DEFAULT_DATA_DIR
     for candidate_dir in (preferred_dir, PORTABLE_DATA_DIR, PROJECT_DIR / ".campusfix-data"):
         if can_write_to_dir(candidate_dir):
@@ -46,7 +52,7 @@ app = Flask(
     template_folder=str(RESOURCE_DIR / "templates"),
     static_folder=str(RESOURCE_DIR / "static"),
 )
-app.config["SECRET_KEY"] = "campusfix-dev-key"
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "campusfix-dev-key")
 app.config["DATABASE"] = DB_PATH
 
 
@@ -656,8 +662,8 @@ def service_worker():
 
 def main():
     init_db()
-    host = os.environ.get("CAMPUSFIX_HOST", "127.0.0.1")
-    port = int(os.environ.get("CAMPUSFIX_PORT", "5000"))
+    host = os.environ.get("CAMPUSFIX_HOST", "0.0.0.0")
+    port = int(os.environ.get("PORT", os.environ.get("CAMPUSFIX_PORT", "5000")))
     app.run(host=host, port=port, debug=False, use_reloader=False)
 
 

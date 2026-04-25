@@ -50,3 +50,21 @@ This repository now includes a GitHub Pages site in `docs/` and an automated wor
 - To publish the static site, push this repo to GitHub and enable Pages with the source set to `GitHub Actions`
 
 Once enabled, the project website will deploy from the `main` branch workflow. For the full live app, use a Python-capable host such as Render, Railway, or PythonAnywhere.
+
+## Deploy The Flask App
+This repo is now prepared for Render deployment with:
+
+- `wsgi.py` for a production WSGI entrypoint
+- `gunicorn` in `requirements.txt`
+- `render.yaml` for one-click infrastructure setup
+- environment-based `SECRET_KEY`, `PORT`, and persistent database storage
+
+### Render
+1. Push the latest code to GitHub.
+2. In Render, create a new Blueprint instance from this repository.
+3. Render will read `render.yaml` and create the web service plus a persistent disk.
+4. After the first deploy finishes, open the generated Render URL.
+
+The SQLite database will be stored on the mounted disk at `/var/data/CampusFix/campusfix.db`, so your app data persists across restarts.
+
+Render note: persistent disks currently require a paid web service. If you switch this service to Render's free tier, the app can still run, but the local SQLite database will be ephemeral and may be lost on restart or redeploy.
